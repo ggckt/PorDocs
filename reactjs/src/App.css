@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;600;700;800;900&display=swap");
+
+*{
+    border: 0px;
+    padding: 0px;    
+}
+.btn:focus,
+.page-link:focus{
+    outline: none;
+    box-shadow: none;
+}
+.trunc{ 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+}
+.carousel-item {
+    transition: transform 1.5s ease-in-out;
+  }
+  
+  .carousel-fade .active.carousel-item-start,
+  .carousel-fade .active.carousel-item-end {
+    transition: opacity 0s 1.5s;
+  }
