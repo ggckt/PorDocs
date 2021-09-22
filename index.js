@@ -4,6 +4,7 @@ let questionRouter = require('./router/question')
 let blogRouter = require('./router/blog')
 let mongoose = require('mongoose')
 let cors = require('cors')
+const path = require("path")
 let app = express();
 
 require('dotenv').config()
@@ -30,6 +31,14 @@ connection.once("open", function () {
 app.use('/api/blog', blogRouter)
 app.use('/api/user', userRouter)
 app.use('/api/question', questionRouter)
+
+
+
+app.use(express.static(path.join(__dirname, "reactjs", "build")));
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "reactjs", "build", "index.html"));
+});
+
 
 app.listen(process.env.PORT || 5000, () => {
     console.log("Server is running")
