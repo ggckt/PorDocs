@@ -5,7 +5,7 @@ function EditQuestion(props) {
     const [question, setquestion] = useState({ title: "", description: "" })
     const [submitting, setsubmitting] = useState(false)
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/question/${props.match.params.id}`)
+        axios.get(`https://pordocs.herokuapp.com/api/question/${props.match.params.id}`)
             .then((res) => {
                 setquestion(res.data)
             })
@@ -24,7 +24,7 @@ function EditQuestion(props) {
         if (token) {
             question.title = e.target.title.value
             question.description = e.target.description.value
-            axios.put(`http://localhost:5000/api/question/${props.match.params.id}`, question, { headers: { "x-access-token": token } })
+            axios.put(`https://pordocs.herokuapp.com/api/question/${props.match.params.id}`, question, { headers: { "x-access-token": token } })
                 .then((res) => {
                     e.target.title.value = ""
                     e.target.description.value = ""

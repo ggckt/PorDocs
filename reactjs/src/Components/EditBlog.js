@@ -5,7 +5,7 @@ function EditBlog(props) {
     const [blog, setblog] = useState({ title: "", content: "" })
     const [submitting, setsubmitting] = useState(false)
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/blog/${props.match.params.id}`)
+        axios.get(`https://pordocs.herokuapp.com/api/blog/${props.match.params.id}`)
             .then((res) => {
                 setblog(res.data)
             })
@@ -24,7 +24,7 @@ function EditBlog(props) {
         if (token) {
             blog.title = e.target.title.value
             blog.content = e.target.content.value
-            axios.put(`http://localhost:5000/api/blog/${props.match.params.id}`, blog, { headers: { "x-access-token": token } })
+            axios.put(`https://pordocs.herokuapp.com/api/blog/${props.match.params.id}`, blog, { headers: { "x-access-token": token } })
                 .then((res) => {
                     e.target.title.value = ""
                     e.target.content.value = ""
