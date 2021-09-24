@@ -8,14 +8,14 @@ function Home(props) {
     const [questionLoaded, setquestionLoaded] = useState(false)
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/blog/page/1`)
+        axios.get(`https://pordocs.herokuapp.com/api/blog/page/1`)
             .then((res) => {
                 setblogs(res.data)
                 setblogLoaded(true)
             })
             .catch((err) => console.log(err))
 
-        axios.get(`http://localhost:5000/api/question/page/1`)
+        axios.get(`https://pordocs.herokuapp.com/api/question/page/1`)
             .then((res) => {
                 setquestion(res.data)
                 setquestionLoaded(true)

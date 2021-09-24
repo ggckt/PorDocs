@@ -10,13 +10,13 @@ function AdminPanel(props) {
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.get("http://localhost:5000/api/blog/adminpendingblogs/", { headers: { "x-access-token": token } })
+            axios.get("https://pordocs.herokuapp.com/api/blog/adminpendingblogs/", { headers: { "x-access-token": token } })
                 .then((res) => {
                     setblogs(res.data)
                 })
                 .catch((err) => console.log(err))
 
-            axios.get("http://localhost:5000/api/question/adminpendingquestions/", { headers: { "x-access-token": token } })
+            axios.get("https://pordocs.herokuapp.com/api/question/adminpendingquestions/", { headers: { "x-access-token": token } })
                 .then((res) => {
                     setquestions(res.data)
                 })
@@ -28,7 +28,7 @@ function AdminPanel(props) {
         setsubmitting(true)
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.delete(`http://localhost:5000/api/blog/adminpendingblogs/${blogid}`, { headers: { "x-access-token": token } })
+            axios.delete(`https://pordocs.herokuapp.com/api/blog/adminpendingblogs/${blogid}`, { headers: { "x-access-token": token } })
                 .then((res) => {
                     const blogPending = blogs.filter((blog) => { return blog._id !== blogid })
                     setblogs(blogPending)
@@ -43,7 +43,7 @@ function AdminPanel(props) {
         setsubmitting(true)
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.put(`http://localhost:5000/api/blog/adminpendingblogs/${blogid}`, {}, { headers: { "x-access-token": token } })
+            axios.put(`https://pordocs.herokuapp.com/api/blog/adminpendingblogs/${blogid}`, {}, { headers: { "x-access-token": token } })
                 .then((res) => {
                     const blogPending = blogs.filter((blog) => { return blog._id !== blogid })
                     setblogs(blogPending)
@@ -58,7 +58,7 @@ function AdminPanel(props) {
         setsubmitting(true)
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.delete(`http://localhost:5000/api/question/adminpendingquestions/${questionid}`, { headers: { "x-access-token": token } })
+            axios.delete(`https://pordocs.herokuapp.com/api/question/adminpendingquestions/${questionid}`, { headers: { "x-access-token": token } })
                 .then((res) => {
                     const questionPending = questions.filter((question) => { return question._id !== questionid })
                     setquestions(questionPending)
@@ -73,7 +73,7 @@ function AdminPanel(props) {
         setsubmitting(true)
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.put(`http://localhost:5000/api/question/adminpendingquestions/${questionid}`, {}, { headers: { "x-access-token": token } })
+            axios.put(`https://pordocs.herokuapp.com/api/question/adminpendingquestions/${questionid}`, {}, { headers: { "x-access-token": token } })
                 .then((res) => {
                     const questionPending = questions.filter((question) => { return question._id !== questionid })
                     setquestions(questionPending)

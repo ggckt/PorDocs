@@ -28,13 +28,13 @@ function ViewQuestion(props) {
     }, [props.isLogedin])
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/question/${props.match.params.id}`)
+        axios.get(`https://pordocs.herokuapp.com/api/question/${props.match.params.id}`)
             .then((res) => {
                 setquestion(res.data)
                 setquestionLoaded(true)
             })
             .catch((err) => console.log(err))
-        axios.get(`http://localhost:5000/api/blog/page/1`)
+        axios.get(`https://pordocs.herokuapp.com/api/blog/page/1`)
             .then((res) => {
                 setblog(res.data)
                 setblogLoaded(true)
@@ -44,7 +44,7 @@ function ViewQuestion(props) {
     }, [props.match.params.id])
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/question/${props.match.params.id}/answer`)
+        axios.get(`https://pordocs.herokuapp.com/api/question/${props.match.params.id}/answer`)
             .then((res) => {
                 setanswers(res.data)
             })
@@ -65,7 +65,7 @@ function ViewQuestion(props) {
         }
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.post(`http://localhost:5000/api/question/${props.match.params.id}/answer`, answer, { headers: { "x-access-token": token } })
+            axios.post(`https://pordocs.herokuapp.com/api/question/${props.match.params.id}/answer`, answer, { headers: { "x-access-token": token } })
                 .then((res) => {
                     e.target.answer.value = ""
                     setstatus("")
@@ -87,7 +87,7 @@ function ViewQuestion(props) {
         }
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.put(`http://localhost:5000/api/question/${props.match.params.id}/answer/${answer_id}`, answer, { headers: { "x-access-token": token } })
+            axios.put(`https://pordocs.herokuapp.com/api/question/${props.match.params.id}/answer/${answer_id}`, answer, { headers: { "x-access-token": token } })
                 .then((res) => {
                     e.target.editAnswer.value = ""
                     seteditMode("")
@@ -104,7 +104,7 @@ function ViewQuestion(props) {
         setsubmitting(true)
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.delete(`http://localhost:5000/api/question/${props.match.params.id}/answer/${answer_id}`, { headers: { "x-access-token": token } })
+            axios.delete(`https://pordocs.herokuapp.com/api/question/${props.match.params.id}/answer/${answer_id}`, { headers: { "x-access-token": token } })
                 .then((res) => {
                     setdeletedAnswer(answer_id)
 
@@ -120,7 +120,7 @@ function ViewQuestion(props) {
         setsubmitting(true)
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.delete(`http://localhost:5000/api/question/${question._id}`, { headers: { "x-access-token": token } })
+            axios.delete(`https://pordocs.herokuapp.com/api/question/${question._id}`, { headers: { "x-access-token": token } })
                 .then((res) => {
 
                     setsubmitting(false)

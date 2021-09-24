@@ -9,7 +9,7 @@ function Blogs(props) {
     const [pageno, setpageno] = useState(1)
     useEffect(() => {
 
-        axios.get(`http://localhost:5000/api/question/page/${Math.max(props.match.params.pageno, 1)}`)
+        axios.get(`https://pordocs.herokuapp.com/api/question/page/${Math.max(props.match.params.pageno, 1)}`)
             .then((res) => {
                 setquestion(res.data)
                 setquestionLoaded(true)
@@ -17,7 +17,7 @@ function Blogs(props) {
             })
             .catch((err) => console.log(err))
 
-        axios.get(`http://localhost:5000/api/blog/page/1`)
+        axios.get(`https://pordocs.herokuapp.com/api/blog/page/1`)
             .then((res) => {
                 setblogs(res.data)
                 setblogLoaded(true)
@@ -27,7 +27,7 @@ function Blogs(props) {
 
     const next = () => {
         window.scrollTo(0, 0)
-        axios.get(`http://localhost:5000/api/question/page/${pageno + 1}`)
+        axios.get(`https://pordocs.herokuapp.com/api/question/page/${pageno + 1}`)
             .then((res) => {
                 props.history.push(`/question/page/${pageno + 1}`)
                 setquestion(res.data)
@@ -38,7 +38,7 @@ function Blogs(props) {
     }
     const prev = () => {
         window.scrollTo(0, 0)
-        axios.get(`http://localhost:5000/api/question/page/${Math.max(pageno - 1, 1)}`)
+        axios.get(`https://pordocs.herokuapp.com/api/question/page/${Math.max(pageno - 1, 1)}`)
             .then((res) => {
                 setquestion(res.data)
                 setpageno(Math.max(pageno - 1, 1))

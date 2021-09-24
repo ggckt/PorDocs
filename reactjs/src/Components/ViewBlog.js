@@ -30,13 +30,13 @@ function ViewBlog(props) {
     }, [props.isLogedin])
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/blog/${props.match.params.id}`)
+        axios.get(`https://pordocs.herokuapp.com/api/blog/${props.match.params.id}`)
             .then((res) => {
                 setblog(res.data)
                 setblogLoaded(true)
             })
             .catch((err) => console.log(err))
-        axios.get(`http://localhost:5000/api/question/page/1`)
+        axios.get(`https://pordocs.herokuapp.com/api/question/page/1`)
             .then((res) => {
                 setquestion(res.data)
                 setquestionLoaded(true)
@@ -45,13 +45,13 @@ function ViewBlog(props) {
 
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.get(`http://localhost:5000/api/blog/${props.match.params.id}/didlike`, { headers: { "x-access-token": token } })
+            axios.get(`https://pordocs.herokuapp.com/api/blog/${props.match.params.id}/didlike`, { headers: { "x-access-token": token } })
                 .then((res) => {
                     setdidlike(res.data)
                 })
                 .catch((err) => console.log(err))
         }
-        axios.get(`http://localhost:5000/api/blog/${props.match.params.id}/likecount`)
+        axios.get(`https://pordocs.herokuapp.com/api/blog/${props.match.params.id}/likecount`)
             .then((res) => {
                 setlikeCount(res.data.count)
             })
@@ -60,7 +60,7 @@ function ViewBlog(props) {
     }, [props.match.params.id])
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/blog/${props.match.params.id}/comment`)
+        axios.get(`https://pordocs.herokuapp.com/api/blog/${props.match.params.id}/comment`)
             .then((res) => {
                 setcommnets(res.data)
             })
@@ -81,7 +81,7 @@ function ViewBlog(props) {
         }
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.post(`http://localhost:5000/api/blog/${props.match.params.id}/comment`, comment, { headers: { "x-access-token": token } })
+            axios.post(`https://pordocs.herokuapp.com/api/blog/${props.match.params.id}/comment`, comment, { headers: { "x-access-token": token } })
                 .then((res) => {
                     e.target.comment.value = ""
                     setstatus("")
@@ -101,7 +101,7 @@ function ViewBlog(props) {
         }
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.put(`http://localhost:5000/api/blog/${props.match.params.id}/comment/${comment_id}`, comment, { headers: { "x-access-token": token } })
+            axios.put(`https://pordocs.herokuapp.com/api/blog/${props.match.params.id}/comment/${comment_id}`, comment, { headers: { "x-access-token": token } })
                 .then((res) => {
                     e.target.editComment.value = ""
                     seteditMode("")
@@ -116,7 +116,7 @@ function ViewBlog(props) {
         setsubmitting(true)
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.delete(`http://localhost:5000/api/blog/${props.match.params.id}/comment/${comment_id}`, { headers: { "x-access-token": token } })
+            axios.delete(`https://pordocs.herokuapp.com/api/blog/${props.match.params.id}/comment/${comment_id}`, { headers: { "x-access-token": token } })
                 .then((res) => {
                     setdeletedComment(comment_id)
                     setsubmitting(false)
@@ -130,7 +130,7 @@ function ViewBlog(props) {
         setsubmitting(true)
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.delete(`http://localhost:5000/api/blog/${blog._id}`, { headers: { "x-access-token": token } })
+            axios.delete(`https://pordocs.herokuapp.com/api/blog/${blog._id}`, { headers: { "x-access-token": token } })
                 .then((res) => {
                     setsubmitting(false)
                     props.history.push('/')
@@ -144,7 +144,7 @@ function ViewBlog(props) {
         setsubmitting(true)
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.post(`http://localhost:5000/api/blog/${blog._id}/like`, {}, { headers: { "x-access-token": token } })
+            axios.post(`https://pordocs.herokuapp.com/api/blog/${blog._id}/like`, {}, { headers: { "x-access-token": token } })
                 .then((res) => {
                     setlikeCount(res.data.count)
                     setdidlike(true)
@@ -157,7 +157,7 @@ function ViewBlog(props) {
         setsubmitting(true)
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.delete(`http://localhost:5000/api/blog/${blog._id}/like`, { headers: { "x-access-token": token } })
+            axios.delete(`https://pordocs.herokuapp.com/api/blog/${blog._id}/like`, { headers: { "x-access-token": token } })
                 .then((res) => {
                     setdidlike(false)
                     setlikeCount(res.data.count)

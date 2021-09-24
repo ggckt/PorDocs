@@ -19,7 +19,7 @@ function AddBlog(props) {
         }
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.post("http://localhost:5000/api/blog/", blog, { headers: { "x-access-token": token } })
+            axios.post("https://pordocs.herokuapp.com/api/blog/", blog, { headers: { "x-access-token": token } })
                 .then((res) => {
                     e.target.title.value = ""
                     e.target.content.value = ""

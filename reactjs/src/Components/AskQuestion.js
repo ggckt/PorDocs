@@ -21,7 +21,7 @@ function AskQuestion(props) {
         }
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.post("http://localhost:5000/api/question/", question, { headers: { "x-access-token": token } })
+            axios.post("https://pordocs.herokuapp.com/api/question/", question, { headers: { "x-access-token": token } })
                 .then((res) => {
                     e.target.title.value = ""
                     e.target.description.value = ""

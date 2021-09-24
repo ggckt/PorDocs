@@ -9,7 +9,7 @@ export default function Header(props) {
     const responseSuccessGoogle = (response) => {
         let data = { tokenId: response.tokenId }
 
-        axios.post("http://localhost:5000/api/user", data).then((res) => {
+        axios.post("https://pordocs.herokuapp.com/api/user", data).then((res) => {
             localStorage.setItem('token', JSON.stringify(res.data.token))
             localStorage.setItem('user', JSON.stringify(res.data.user))
             setuser(res.data.user)
