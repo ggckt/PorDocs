@@ -16,7 +16,6 @@ if (process.env.NODE_ENV === 'production') {
             next()
     })
 }
-app.use();
 app.use(cors())
 mongoose.set('useFindAndModify', false);
 
