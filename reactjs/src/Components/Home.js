@@ -53,9 +53,9 @@ function Home(props) {
                     <span className="sr-only"></span>
                 </a>
             </div>
-            <div className="container-fluid bg-info">
+            <div className="container-fluid bg-light">
                 <div className="row">
-                    <h2 className="text-center text-white mt-2">Recent Blogs</h2>
+                    <h2 className="text-center text-white border border-primary bg-primary mb-4 pt-2 pb-2">Recent Blogs</h2>
                     {
                         !blogLoaded ? <div className="d-flex justify-content-center mt-5">
                             <div className="spinner-grow text-primary" role="status"></div>
@@ -67,8 +67,8 @@ function Home(props) {
                     {
                         blogs.map((blog) => {
                             return (
-                                <div key={blog._id} className="col-md-5 m-auto  ">
-                                    <div className="shadow-lg mb-3 bg-info rounded list-group-item list-group-item-action ">
+                                <div key={blog._id} className="col-md-5 m-auto p-md-0 ">
+                                    <div className="shadow-lg mb-3 bg-white rounded list-group-item list-group-item-action ">
                                         <Link to={`/blog/${blog._id}`} className="flex-column align-items-start" style={{ textDecoration: "none" }}>
                                             <div className="d-flex w-100 justify-content-between">
                                                 <h5 className="text-dark pt-3">{blog.title}</h5>
@@ -76,7 +76,7 @@ function Home(props) {
                                             <p className="trunc text-dark">{blog.content}</p>
                                             <small className="text-muted ">By {blog.username}</small>
                                             <div className="text-center">
-                                                <p className="btn btn-outline-dark rounded-circle text-white">Read More</p>
+                                                <p className="btn btn-outline-dark rounded-circle text-primary">Read More</p>
                                             </div>
                                         </Link>
                                     </div>
@@ -86,9 +86,9 @@ function Home(props) {
                     }
                 </div>
             </div>
-            <div className="container-fluid bg-primary">
+            <div className="container-fluid bg-light">
                 <div className="row">
-                    <h2 className="text-center text-dark mt-2">Recent Questions</h2>
+                    <h2 className="text-center text-white border border-primary bg-primary mt-2 mb-4 pt-2 pb-2">Recent Questions</h2>
                     {
                         !questionLoaded ? <div className="d-flex justify-content-center mt-5">
                             <div className="spinner-grow text-primary" role="status"></div>
@@ -100,16 +100,16 @@ function Home(props) {
                     {
                         question.map((q) => {
                             return (
-                                <div key={q._id} className="col-md-5 m-auto" >
-                                    <div className="shadow-lg mb-3 bg-primary rounded list-group-item list-group-item-action ">
+                                <div key={q._id} className="col-md-5 m-auto p-md-0" >
+                                    <div className="shadow-lg mb-3 bg-white rounded list-group-item list-group-item-action ">
                                         <Link key={q._id} to={`/question/${q._id}`} className="flex-column align-items-start" style={{ textDecoration: "none" }}>
                                             <div className="d-flex w-100 justify-content-between">
-                                                <h5 className="text-white pt-3">{q.title}</h5>
+                                                <h5 className="text-dark pt-3">{q.title}</h5>
                                             </div>
-                                            <p className="trunc text-white">{q.description}</p>
-                                            <small className="text-dark">By {q.username}</small>
+                                            <p className="trunc text-dark">{q.description}</p>
+                                            <small className="text-muted">By {q.username}</small>
                                             <div className="text-center">
-                                                <p className="btn btn-outline-dark rounded-circle text-white">Read More</p>
+                                                <p className="btn btn-outline-dark rounded-circle text-primary">Read More</p>
                                             </div>
                                         </Link>
                                     </div>
