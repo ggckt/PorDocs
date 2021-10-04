@@ -13,11 +13,7 @@ if (process.env.NODE_ENV === 'production') {
         if (req.header('x-forwarded-proto') !== 'https')
             res.redirect(`https://${req.header('host')}${req.url}`)
         else {
-            const host = req.header('host')
-            if (host.match(/^www\..*/i))
-                next()
-            else
-                res.redirect(`https://www.${req.header('host')}${req.url}`)
+            next()
         }
     })
 }
