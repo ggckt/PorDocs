@@ -10,6 +10,22 @@ userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    phoneno: {
+        type: Number,
+        required: false,
+    },
+    linkedin: {
+        type: String,
+        required: false
+    },
+    facebook: {
+        type: String,
+        required: false
+    },
+    showDetails: {
+        type: Boolean,
+        default: false
+    },
     date: {
         type: Date,
         default: Date.now()

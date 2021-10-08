@@ -79,6 +79,18 @@ exports.getbyid = (req, res, next) => {
     })
 }
 
+exports.getBlogsbyProfile = (req, res, next) => {
+
+    Blog.find({ userid: req.params.id }, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(data)
+            res.end();
+        }
+    })
+}
 
 exports.postBlog = (req, res, next) => {
 

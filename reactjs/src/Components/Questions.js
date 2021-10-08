@@ -63,14 +63,23 @@ function Blogs(props) {
                     {
                         question.map((q) => {
                             return (
-                                <Link key={q._id} to={`/question/${q._id}`} className="list-group-item list-group-item-action flex-column align-items-start shadow-lg mb-3 bg-white rounded">
-                                    <div className="d-flex w-100 justify-content-between">
-                                        <h4 className="mb-1 pt-3">{q.title}</h4>
+                                <div key={q._id} >
+                                    <div className="list-group-item list-group-item-action shadow-lg mb-3 bg-white rounded">
+
+                                        <Link to={`/question/${q._id}`} className="flex-column align-items-start" style={{ textDecoration: "none" }}>
+                                            <div className="d-flex w-100 justify-content-between">
+                                                <h4 className="mb-1 text-dark pt-3">{q.title}</h4>
+                                            </div>
+                                            <p className="mb-1 trunc text-dark mt-2">{q.description}</p>
+                                        </Link>
+                                        <Link to={`/profile/${q.userid}`} style={{ textDecoration: "none" }}>
+                                            <small className="text-muted">By {q.username}</small>
+                                        </Link>
+                                        <Link to={`/question/${q._id}`} style={{ textDecoration: "none" }}>
+                                            <p className="text-center text-info">Read More</p>
+                                        </Link>
                                     </div>
-                                    <p className="mb-1 trunc mt-2">{q.description}</p>
-                                    <small className="text-muted">By {q.username}</small>
-                                    <p className="text-center text-info">Read More</p>
-                                </Link>
+                                </div>
                             )
                         })
                     }
@@ -104,7 +113,7 @@ function Blogs(props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

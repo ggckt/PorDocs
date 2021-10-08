@@ -181,10 +181,11 @@ function ViewBlog(props) {
                     <h3 className="text-center mt-2">{blog.title}</h3>
                     <p className="text-center  ms-1 ms-md-4">Posted by {blog.username} on {blog.date}</p>
                     {
-                        user._id && user._id === blog.userid ? <div className="ms-1 ms-md-4">
-                            <Link to={`/blog/edit/${blog._id}`} className="fs-5">Edit</Link>
-                            <button disabled={submitting} onClick={deleteBlog} className="ps-2 text-danger bg-white fs-5" >Delete</button>
-                        </div> : null
+                        user._id && user._id === blog.userid ?
+                            <div className="ms-1 ms-md-4">
+                                <Link to={`/blog/edit/${blog._id}`} className="fs-5">Edit</Link>
+                                <button disabled={submitting} onClick={deleteBlog} className="ps-2 text-danger bg-white fs-5" >Delete</button>
+                            </div> : null
                     }
                     <p style={{ whiteSpace: 'pre-wrap' }} className="fs-5 ms-1 me-1 ms-md-4 me-md-4 mt-4 ">{blog.content}</p>
 

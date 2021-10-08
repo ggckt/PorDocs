@@ -13,6 +13,8 @@ import Questions from './Components/Questions'
 import ViewQuestion from './Components/ViewQuestion'
 import AdminPanel from './Components/AdminPanel';
 import Footer from './Components/Footer'
+import Profile from './Components/Profile';
+import EditProfile from './Components/EditProfile';
 function App() {
 
   const [isLogedin, setisLogedin] = useState(false)
@@ -38,6 +40,9 @@ function App() {
         <Route path='/question/:id' exact render={(props) => <ViewQuestion isLogedin={isLogedin} {...props} />}></Route>
         <Route path='/question/edit/:id' exact render={(props) => <EditQuestion isLogedin={isLogedin} {...props} />}></Route>
         <Route path='/adminpanel' exact render={(props) => <AdminPanel isLogedin={isLogedin} {...props} />}></Route>
+        <Route path='/profile/edit/:id' exact render={(props) => <EditProfile isLogedin={isLogedin} {...props} />}></Route>
+        <Route path='/profile/:id' exact render={(props) => <Profile isLogedin={isLogedin} {...props} />}></Route>
+
       </Switch>
       <Footer />
     </BrowserRouter >

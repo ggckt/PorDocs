@@ -61,14 +61,22 @@ function Blogs(props) {
                     {
                         blogs.map((blog) => {
                             return (
-                                <Link key={blog._id} to={`/blog/${blog._id}`} className="list-group-item list-group-item-action flex-column align-items-start shadow-lg mb-3 bg-white rounded">
-                                    <div className="d-flex w-100 justify-content-between">
-                                        <h4 className="mb-1 pt-3">{blog.title}</h4>
+                                <div key={blog._id} >
+                                    <div className="list-group-item list-group-item-action shadow-lg mb-3 bg-white rounded">
+                                        <Link to={`/blog/${blog._id}`} className="flex-column align-items-start" style={{ textDecoration: "none" }}>
+                                            <div className="d-flex w-100 justify-content-between">
+                                                <h4 className="mb-1 text-dark pt-3">{blog.title}</h4>
+                                            </div>
+                                            <p className="mb-1 text-dark trunc mt-2">{blog.content}</p>
+                                        </Link>
+                                        <Link to={`/profile/${blog.userid}`} style={{ textDecoration: "none" }}>
+                                            <small className="text-muted">By {blog.username}</small>
+                                        </Link>
+                                        <Link to={`/blog/${blog._id}`} style={{ textDecoration: "none" }}>
+                                            <p className="text-center text-info">Read More</p>
+                                        </Link>
                                     </div>
-                                    <p className="mb-1 trunc mt-2">{blog.content}</p>
-                                    <small className="text-muted">By {blog.username}</small>
-                                    <p className="text-center text-info">Read More</p>
-                                </Link>
+                                </div>
                             )
                         })
                     }
