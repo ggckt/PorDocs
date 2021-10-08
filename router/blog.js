@@ -5,6 +5,7 @@ let router = express.Router();
 let blogController = require('../controller/blog')
 
 router.get('/adminpendingblogs', verifytoken, isAdmin, blogController.getAllPendingBlogsAdmin)
+router.get('/profile/:id', blogController.getBlogsbyProfile)
 router.get('/page/:page', blogController.getAllblogs)
 router.get('/:id', blogController.getbyid)
 router.get('/:id/likecount', blogController.getLikeCount)

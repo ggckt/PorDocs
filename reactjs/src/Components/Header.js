@@ -8,7 +8,6 @@ export default function Header(props) {
 
     const responseSuccessGoogle = (response) => {
         let data = { tokenId: response.tokenId }
-
         axios.post("https://pordocs.herokuapp.com/api/user", data).then((res) => {
             localStorage.setItem('token', JSON.stringify(res.data.token))
             localStorage.setItem('user', JSON.stringify(res.data.user))
@@ -58,6 +57,11 @@ export default function Header(props) {
                                     <li className="nav-item">
                                         <NavLink className="nav-link fs-5" to="/adminpanel">Admin Panel</NavLink>
                                     </li> : null
+                            }
+                            {
+                                user && user._id ? <li className="nav-item">
+                                    <NavLink className="nav-link fs-5" to={`/profile/${user._id}`}>My Profile</NavLink>
+                                </li> : null
                             }
                         </ul>
                         {

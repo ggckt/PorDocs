@@ -1,11 +1,47 @@
 let User = require('../models/user')
 let jwt = require('jsonwebtoken')
 let { OAuth2Client } = require('google-auth-library')
+const user = require('../models/user')
 
 const client = new OAuth2Client("1074737771366-mat44f2fndsqpdb8erut14rkmg9e6ui4.apps.googleusercontent.com")
 
+exports.getUser = (req, res) => {
+    User.findById(req.params.id, (err, data) => {
+        if (err)
+            console.log(err);
+        else {
+            if ((req.user && req.user._id == data._id) || data.showDetails == true) {
+                res.send(data);
+                res.end()
+            }
+            else {
+                data.facebook = "";
+                data.linkedin = "";
+                data.phoneno = "";
+                data.email = "";
+                res.send(data);
+                res.end()
+            }
+        }
+
+    })
+}
+
+exports.editUser = (req, res, next) => {
+    User.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            res.status(200).json("success")
+        }
+    })
+}
+
+
 exports.googleSignin = (req, res, next) => {
     let { tokenId } = req.body
+
     client.verifyIdToken({ idToken: tokenId, audience: "1074737771366-mat44f2fndsqpdb8erut14rkmg9e6ui4.apps.googleusercontent.com" })
         .then((response) => {
             const { email_verified, name, email } = response.payload
@@ -18,6 +54,7 @@ exports.googleSignin = (req, res, next) => {
                     else {
                         if (user) {
                             const token = jwt.sign({ user }, 'secret of pordocs', { expiresIn: '1d' })
+                            req.user = user
                             res.json({ token, user })
                         }
                         else {
@@ -28,6 +65,7 @@ exports.googleSignin = (req, res, next) => {
                                     res.status(400).json("Unauthenticated")
                                 }
                                 else {
+                                    req.user = user
                                     const token = jwt.sign({ user }, 'secret of pordocs', { expiresIn: '1d' })
                                     res.json({ token, user })
                                 }

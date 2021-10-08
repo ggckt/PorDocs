@@ -74,7 +74,11 @@ function Home(props) {
                                                 <h5 className="text-dark pt-3">{blog.title}</h5>
                                             </div>
                                             <p className="trunc text-dark">{blog.content}</p>
+                                        </Link>
+                                        <Link to={`/profile/${blog.userid}`} style={{ textDecoration: "none" }}>
                                             <small className="text-muted ">By {blog.username}</small>
+                                        </Link>
+                                        <Link to={`/blog/${blog._id}`}>
                                             <div className="text-center">
                                                 <p className="btn btn-outline-dark rounded-circle text-primary">Read More</p>
                                             </div>
@@ -107,7 +111,11 @@ function Home(props) {
                                                 <h5 className="text-dark pt-3">{q.title}</h5>
                                             </div>
                                             <p className="trunc text-dark">{q.description}</p>
+                                        </Link>
+                                        <Link to={`/profile/${q.userid}`} style={{ textDecoration: "none" }}>
                                             <small className="text-muted">By {q.username}</small>
+                                        </Link>
+                                        <Link to={`/question/${q._id}`}>
                                             <div className="text-center">
                                                 <p className="btn btn-outline-dark rounded-circle text-primary">Read More</p>
                                             </div>
@@ -119,7 +127,7 @@ function Home(props) {
                     }
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
