@@ -14,6 +14,11 @@ if (process.env.NODE_ENV === 'production') {
             res.redirect(`https://${req.header('host')}${req.url}`)
         else {
             next()
+            const host = req.header('host')
+            if (host.match(/^www\..*/i) || host.indexOf("heroku") !== -1)
+                next()
+            else
+                res.redirect(`https://www.${req.header('host')}${req.url}`)
         }
     })
 }
