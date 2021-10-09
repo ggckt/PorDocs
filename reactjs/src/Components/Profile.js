@@ -40,8 +40,8 @@ export default function Profile(props) {
                     <h5 className="text-center">{profile.phoneno}</h5>
                     <h5 className="text-center">{profile.email}</h5>
                     <div className="icons text-center">
-                        <Link to={profile.linkedin || "#"} className="ps-2 pe-2" ><i className="fa fa-linkedin fa-2x" ></i></Link>
-                        <Link to={profile.facebook || "#"} className="ps-2 pe-2"><i className="fa fa-facebook fa-2x"></i></Link>
+                        <Link to={{ pathname: profile.linkedin || "#" }} target="_blank" className="ps-2 pe-2" ><i className="fa fa-linkedin fa-2x" ></i></Link>
+                        <Link to={{ pathname: profile.facebook || "#" }} target="_blank" className="ps-2 pe-2"><i className="fa fa-facebook fa-2x"></i></Link>
                     </div>
                 </div> : null}
 
