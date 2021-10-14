@@ -5,6 +5,7 @@ let blogRouter = require('./router/blog')
 let mongoose = require('mongoose')
 let cors = require('cors')
 const path = require("path")
+const nodemailer = require('nodemailer');
 let app = express();
 require('dotenv').config()
 
@@ -38,7 +39,35 @@ connection.once("open", function () {
 
 
 
+app.post('/contactus', (req, res) => {
+    const mailTransport = nodemailer.createTransport({
+        host: "smtpout.secureserver.net",
+        secure: true,
+        secureConnection: true,
+        tls: {
+            ciphers: 'SSLv3'
+        },
+        requireTLS: true,
+        port: 465,
+        debug: true,
+        auth: {
+            user: "helpdesk@pordocs.com",
+            pass: process.env.PRIMARY_EMAIL_PASSWORD
+        }
+    });
+    const mailOptions = {
+        from: `helpdesk@pordocs.com`,
+        to: process.env.SECONDARY_EMAIL,
+        subject: `From Pordocs Contact Us`,
+        text: req.body.name + ` with mail Id ` + req.body.email + ` has sent the below meassage\n` + req.body.message
+    };
 
+    mailTransport.sendMail(mailOptions).then(() => {
+        res.status(200).json("success")
+    }).catch((err) => {
+        console.error(err);
+    });
+})
 
 
 app.use('/api/blog', blogRouter)
