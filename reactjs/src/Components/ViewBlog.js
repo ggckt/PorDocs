@@ -213,7 +213,7 @@ function ViewBlog(props) {
                     {
                         commnets.map((comment) => {
                             return (
-                                <div key={comment._id} className="ms-2 me-2 ms-md-5 me-md-5 card-border-0">
+                                <div key={comment._id} id={comment._id} className="ms-2 me-2 ms-md-5 me-md-5 card-border-0">
                                     <div className="card-body p-0">
                                         {
                                             editMode === comment._id ? null :
