@@ -5,6 +5,7 @@ let router = express.Router();
 let questionController = require('../controller/question')
 
 router.get('/adminpendingquestions', verifytoken, isAdmin, questionController.getAllPendingQuestionsAdmin)
+router.get('/adminapprovedquestions', verifytoken, isAdmin, questionController.getAllApprovedQuestionsAdmin)
 router.get('/page/:page', questionController.getAllquestion)
 router.get('/:id', questionController.getQuestinbyid)
 router.get('/:id/answer', questionController.getAnswers)

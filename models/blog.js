@@ -29,7 +29,11 @@ blogSchema = new mongoose.Schema({
     commentids: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "comment"
-    }]
+    }],
+    likeCount: {
+        type: Number,
+        default: 0
+    }
 })
 
 module.exports = mongoose.model("Blog", blogSchema)

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { Helmet } from "react-helmet"
 
 function ViewQuestion(props) {
     const [blog, setblog] = useState([])
@@ -133,6 +134,10 @@ function ViewQuestion(props) {
     }
     return (
         <div className="container-fluid">
+            <Helmet>
+                <title>{question.title}</title>
+                <meta name="description" content={question.description} />
+            </Helmet>
             <div className="row">
                 <div className="col-md-9 ps-md-4">
                     {
@@ -208,7 +213,7 @@ function ViewQuestion(props) {
                     }
                 </div>
                 <div className="col-md-3 mt-4 mt-md-5">
-                    <h4 className="mt-md-5 text-center">Latest Blogs</h4>
+                    <h4 className="mt-md-5 text-center">Top Blogs</h4>
                     {
                         !blogLoaded ? <div className="d-flex justify-content-center mt-5">
                             <div className="spinner-grow spinner-grow-sm text-primary" role="status"></div>

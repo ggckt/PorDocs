@@ -24,15 +24,24 @@ exports.getAllPendingQuestionsAdmin = (req, res, next) => {
             res.send(data)
     })
 }
+exports.getAllApprovedQuestionsAdmin = (req, res, next) => {
+    Question.find({ isApproved: true }, {}, { sort: { '_id': -1 } }, (err, data) => {
+        if (err) {
+            console.log(err)
+        }
+        else
+            res.send(data)
+    })
+}
 exports.approveQuestionAdmin = (req, res) => {
     Question.findById(req.params.id, (err, data) => {
         if (err) {
             console.log(err);
         }
         else {
-            data.isApproved = true;
+            data.isApproved = !data.isApproved;
             data.save()
-            res.send("Approved");
+            res.send("Success");
         }
     })
 }

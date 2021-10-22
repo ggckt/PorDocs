@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { Helmet } from 'react-helmet'
 function Blogs(props) {
     const [blogs, setblogs] = useState([])
     const [question, setquestion] = useState([])
@@ -48,6 +49,10 @@ function Blogs(props) {
     }
     return (
         <div className="container-fluid">
+            <Helmet>
+                <title>PorDocs Blogs</title>
+                <meta name="description" content="It contains blogs related to finance " />
+            </Helmet>
             <div className="row mt-4">
                 <div className="col-md-9 ps-md-4">
                     {
@@ -110,7 +115,7 @@ function Blogs(props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -15,6 +15,7 @@ import AdminPanel from './Components/AdminPanel';
 import Footer from './Components/Footer'
 import Profile from './Components/Profile';
 import EditProfile from './Components/EditProfile';
+import { Helmet } from 'react-helmet'
 function App() {
 
   const [isLogedin, setisLogedin] = useState(false)
@@ -29,6 +30,9 @@ function App() {
   return (
     <BrowserRouter>
       <Header isLogedin={isLogedin} logout={logout} login={login} />
+      <Helmet>
+        <title>PorDocs</title>
+      </Helmet>
       <Switch>
         <Route path='/' exact render={(props) => <Home isLogedin={isLogedin} {...props} />} ></Route>
         <Route path='/addblog' exact render={(props) => <AddBlog isLogedin={isLogedin} {...props} />}></Route>
