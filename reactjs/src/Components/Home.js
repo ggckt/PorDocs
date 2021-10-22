@@ -55,7 +55,7 @@ function Home(props) {
             </div>
             <div className="container-fluid bg-light">
                 <div className="row">
-                    <h2 className="text-center text-white border border-primary bg-primary mb-4 pt-2 pb-2">Recent Blogs</h2>
+                    <h2 className="text-center text-white border border-primary bg-primary mb-4 pt-2 pb-2">Top Blogs</h2>
                     {
                         !blogLoaded ? <div className="d-flex justify-content-center mt-5">
                             <div className="spinner-grow text-primary" role="status"></div>

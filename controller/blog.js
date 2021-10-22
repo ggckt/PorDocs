@@ -1,4 +1,3 @@
-const { ObjectId } = require('bson');
 let Blog = require('../models/blog')
 let Comment = require('../models/comment')
 let Like = require('../models/likeBlog')
@@ -7,7 +6,7 @@ exports.getAllblogs = (req, res, next) => {
     let skip = req.params.page;
     skip = (skip - 1) * 10;
 
-    Blog.find({ isApproved: true }, {}, { sort: { '_id': -1 }, skip: skip, limit: 10 }, (err, data) => {
+    Blog.find({ isApproved: true }, {}, { sort: { 'likeCount': -1 }, skip: skip, limit: 10 }, (err, data) => {
         if (err) {
             console.log(err)
         }
@@ -24,9 +23,27 @@ exports.getAllPendingBlogsAdmin = (req, res, next) => {
             res.send(data)
     })
 }
+exports.getAllApprovedBlogsAdmin = (req, res, next) => {
+    Blog.find({ isApproved: true }, {}, { sort: { '_id': -1 } }, (err, data) => {
+        if (err) {
+            console.log(err)
+        }
+        else
+            res.send(data)
+    })
+}
+exports.getAllPendingCommentsAdmin = (req, res, next) => {
+    Comment.find({ isApproved: false }, {}, { sort: { '_id': -1 } }, (err, data) => {
+        if (err) {
+            console.log(err)
+        }
+        else
+            res.send(data)
+    })
+}
 exports.getComments = (req, res, next) => {
     let blogId = req.params.id
-    Comment.find({ blogId }, (err, data) => {
+    Comment.find({ blogId, isApproved: true }, (err, data) => {
         if (err) {
             console.log(err)
         }
@@ -122,8 +139,8 @@ exports.editBlog = (req, res, next) => {
 
 exports.addComment = (req, res, next) => {
     req.body.blogId = req.params.id
-    req.body.userid = req.user._id
-    req.body.username = req.user.username
+    //req.body.userid = req.user._id
+    //req.body.username = req.user.username
     Comment.create(req.body, (err, data) => {
         if (err) {
             console.log(err)
@@ -154,6 +171,18 @@ exports.approveBlogAdmin = (req, res) => {
             console.log(err);
         }
         else {
+            data.isApproved = !data.isApproved;
+            data.save()
+            res.send("success");
+        }
+    })
+}
+exports.approveCommentAdmin = (req, res) => {
+    Comment.findById(req.params.id, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
             data.isApproved = true;
             data.save()
             res.send("Approved");
@@ -176,6 +205,15 @@ exports.addLike = (req, res) => {
                 else {
                     data[0].userid.push(req.user._id)
                     data[0].save()
+                    Blog.findById(req.params.id, (err, data) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+                            data.likeCount = data.likeCount + 1;
+                            data.save()
+                        }
+                    })
                 }
                 res.send({ count: data[0].userid.length })
             }
@@ -184,6 +222,15 @@ exports.addLike = (req, res) => {
                     if (err)
                         console.log(err)
                     else {
+                        Blog.findById(req.params.id, (err, data) => {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                data.likeCount = 1;
+                                data.save()
+                            }
+                        })
                         res.send({ count: 1 })
                     }
                 })
@@ -229,6 +276,15 @@ exports.deleteBlogbyAdmin = (req, res, next) => {
         }
     })
 }
+exports.deleteCommentbyAdmin = (req, res, next) => {
+    Comment.findByIdAndRemove(req.params.id, (err, data) => {
+        if (err)
+            console.log(err)
+        else {
+            res.status(200).json("success")
+        }
+    })
+}
 exports.removeLike = (req, res) => {
     Like.find({ blogid: req.params.id }, (err, data) => {
         if (data[0]) {
@@ -237,6 +293,15 @@ exports.removeLike = (req, res) => {
             })
             data[0].userid = rmlike
             data[0].save()
+            Blog.findById(req.params.id, (err, data) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    data.likeCount = Math.max(0, data.likeCount - 1);
+                    data.save()
+                }
+            })
             res.send({ count: data[0].userid.length })
         }
         else {

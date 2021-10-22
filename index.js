@@ -57,7 +57,8 @@ app.post('/contactus', (req, res) => {
     });
     const mailOptions = {
         from: `helpdesk@pordocs.com`,
-        to: process.env.SECONDARY_EMAIL,
+        to: process.env.PRIMARY_EMAIL_PASSWORD,
+        replyTo: req.body.email,
         subject: `From Pordocs Contact Us`,
         text: req.body.name + ` with mail Id ` + req.body.email + ` has sent the below meassage\n` + req.body.message
     };

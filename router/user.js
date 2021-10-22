@@ -5,11 +5,11 @@ let jwt = require('jsonwebtoken')
 let userController = require('../controller/user')
 
 
-router.put('/edit/:id', verifytoken, checkUser, userController.editUser)
+router.get('/alluser', verifytoken, isAdmin, userController.getAllUser)
 router.get('/:id', addUserDetail, userController.getUser)
+router.put('/edit/:id', verifytoken, checkUser, userController.editUser)
 router.post('', userController.googleSignin)
-
-
+router.delete('/:id', verifytoken, isAdmin, userController.deleteUser)
 function addUserDetail(req, res, next) {
     const token = req.headers['x-access-token']
     if (!token) {
@@ -47,6 +47,15 @@ function verifytoken(req, res, next) {
         })
     }
 }
+function isAdmin(req, res, next) {
+    if (req.user.isAdmin) {
+        next()
+    }
+    else {
+        res.status(401).json({ auth: false, message: "You are not Admin" })
+    }
+}
+
 function checkUser(req, res, next) {
     if (req.user._id == req.params.id) {
         next()

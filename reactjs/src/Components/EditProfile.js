@@ -32,6 +32,10 @@ export default function EditProfile(props) {
             phoneno: e.target.phoneno.value,
             linkedin: e.target.linkedin.value,
             facebook: e.target.facebook.value,
+            instagram: e.target.instagram.value,
+            twitter: e.target.twitter.value,
+            youtube: e.target.youtube.value,
+            other: e.target.other.value,
             showDetails: e.target.showDetails.checked
         }
         const token = JSON.parse(localStorage.getItem('token'))
@@ -41,6 +45,10 @@ export default function EditProfile(props) {
                     e.target.phoneno.value = ""
                     e.target.linkedin.value = ""
                     e.target.facebook.value = ""
+                    e.target.instagram.value = ""
+                    e.target.twitter.value = ""
+                    e.target.youtube.value = ""
+                    e.target.other.value = ""
                     props.history.push(`/profile/${props.match.params.id}`)
                     setsubmitting(false)
                 })
@@ -64,6 +72,24 @@ export default function EditProfile(props) {
                 <div className="form-floating mb-3">
                     <input defaultValue={profile.facebook} type="text" name="facebook" className="form-control" id="floatingInput" placeholder="Facebook url"></input>
                     <label>Facebook url (optional)</label>
+                </div>
+
+                <div className="form-floating mb-3">
+                    <input defaultValue={profile.instagram} type="text" name="instagram" className="form-control" id="floatingInput" placeholder="Instagram url"></input>
+                    <label>Instagram url (optional)</label>
+                </div>
+
+                <div className="form-floating mb-3">
+                    <input defaultValue={profile.twitter} type="text" name="twitter" className="form-control" id="floatingInput" placeholder="Twitter url"></input>
+                    <label>Twitter url (optional)</label>
+                </div>
+                <div className="form-floating mb-3">
+                    <input defaultValue={profile.youtube} type="text" name="youtube" className="form-control" id="floatingInput" placeholder="Youtube url"></input>
+                    <label>Youtube url (optional)</label>
+                </div>
+                <div className="form-floating mb-3">
+                    <input defaultValue={profile.other} type="text" name="other" className="form-control" id="floatingInput" placeholder="Any Other url"></input>
+                    <label>Any Other url (optional)</label>
                 </div>
                 <div>
                     <input className="me-2" type="checkbox" name="showDetails" value="true"></input>

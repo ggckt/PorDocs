@@ -5,6 +5,8 @@ let router = express.Router();
 let blogController = require('../controller/blog')
 
 router.get('/adminpendingblogs', verifytoken, isAdmin, blogController.getAllPendingBlogsAdmin)
+router.get('/adminapprovedblogs', verifytoken, isAdmin, blogController.getAllApprovedBlogsAdmin)
+router.get('/adminpendingcomments', verifytoken, isAdmin, blogController.getAllPendingCommentsAdmin)
 router.get('/profile/:id', blogController.getBlogsbyProfile)
 router.get('/page/:page', blogController.getAllblogs)
 router.get('/:id', blogController.getbyid)
@@ -15,18 +17,20 @@ router.get('/:id/comment', blogController.getComments)
 
 router.post('/', verifytoken, blogController.postBlog)
 router.post('/:id/like', verifytoken, blogController.addLike)
-router.post('/:id/comment', verifytoken, blogController.addComment)
+router.post('/:id/comment', blogController.addComment)
 
 
 router.put('/adminpendingblogs/:id', verifytoken, isAdmin, blogController.approveBlogAdmin)
+router.put('/adminpendingcomments/:id', verifytoken, isAdmin, blogController.approveCommentAdmin)
 router.put('/:id', verifytoken, blogController.isAuthorized, blogController.editBlog)
-router.put('/:id/comment/:cmntid', verifytoken, blogController.userDidComment, blogController.editComment)
+//router.put('/:id/comment/:cmntid', verifytoken, blogController.userDidComment, blogController.editComment)
 
 
 router.delete('/adminpendingblogs/:id', verifytoken, isAdmin, blogController.deleteBlogbyAdmin)
+router.delete('/adminpendingcomments/:id', verifytoken, isAdmin, blogController.deleteCommentbyAdmin)
 router.delete('/:id', verifytoken, blogController.isAuthorized, blogController.deleteBlog)
 router.delete('/:id/like', verifytoken, blogController.removeLike)
-router.delete('/:id/comment/:cmntid', verifytoken, blogController.userDidComment, blogController.deleteComment)
+//router.delete('/:id/comment/:cmntid', verifytoken, blogController.userDidComment, blogController.deleteComment)
 
 
 function verifytoken(req, res, next) {

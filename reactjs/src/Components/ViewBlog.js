@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { Helmet } from "react-helmet"
 
 function ViewBlog(props) {
     const [blog, setblog] = useState([])
@@ -8,7 +9,7 @@ function ViewBlog(props) {
     const [commnets, setcommnets] = useState([])
     const [editMode, seteditMode] = useState("")
     const [deletedComment, setdeletedComment] = useState([])
-    const [status, setstatus] = useState("You are not Logged In, Log In to comment")
+    const [status, setstatus] = useState("")
     const [user, setuser] = useState({})
     const [blogLoaded, setblogLoaded] = useState(false)
     const [questionLoaded, setquestionLoaded] = useState(false)
@@ -24,7 +25,7 @@ function ViewBlog(props) {
             setuser(user)
         }
         else {
-            setstatus("You are not Logged In, Log In to comment")
+            setstatus("")
             setuser("")
         }
     }, [props.isLogedin])
@@ -77,21 +78,23 @@ function ViewBlog(props) {
         e.preventDefault()
         setsubmitting(true)
         const comment = {
-            comnt: e.target.comment.value,
+            username: e.target.username.value,
+            comnt: e.target.comment.value
         }
-        const token = JSON.parse(localStorage.getItem('token'))
-        if (token) {
-            axios.post(`https://pordocs.herokuapp.com/api/blog/${props.match.params.id}/comment`, comment, { headers: { "x-access-token": token } })
-                .then((res) => {
-                    e.target.comment.value = ""
-                    setstatus("")
-                    setstatus("Your Comment has been Successfully Submitted")
-                    setsubmitting(false)
-                })
-                .catch((err) => console.log(err))
-        }
+        //const token = JSON.parse(localStorage.getItem('token'))
+        //if (token) {
+        axios.post(`https://pordocs.herokuapp.com/api/blog/${props.match.params.id}/comment`, comment)
+            .then((res) => {
+                e.target.comment.value = ""
+                e.target.username.value = ""
+                setstatus("")
+                setstatus("Your Comment has been Successfully Submitted")
+                setsubmitting(false)
+            })
+            .catch((err) => console.log(err))
+        /*}
         else {
-        }
+        }*/
     }
     const editComment = (e, comment_id) => {
         e.preventDefault()
@@ -168,6 +171,10 @@ function ViewBlog(props) {
     }
     return (
         <div className="container-fluid">
+            <Helmet>
+                <title>{blog.title}</title>
+                <meta name="description" content={blog.content} />
+            </Helmet>
             <div className="row">
                 <div className="col-md-9 ps-md-4">
                     {
@@ -186,6 +193,7 @@ function ViewBlog(props) {
                                 <Link to={`/blog/edit/${blog._id}`} className="fs-5">Edit</Link>
                                 <button disabled={submitting} onClick={deleteBlog} className="ps-2 text-danger bg-white fs-5" >Delete</button>
                             </div> : null
+
                     }
                     <p style={{ whiteSpace: 'pre-wrap' }} className="fs-5 ms-1 me-1 ms-md-4 me-md-4 mt-4 ">{blog.content}</p>
 
@@ -201,9 +209,10 @@ function ViewBlog(props) {
                                     {status}
                                 </div> : null
                         }
-                        <div className="card-body">
+                        <div className="card-body ">
                             <h5 className="card-title">Comment</h5>
-                            <textarea name="comment" required className="card-text form-control h-60 border-2" ></textarea>
+                            <input name="username" required className="card-text mb-2 form-control border-2" placeholder="Enter Your Name"></input>
+                            <textarea name="comment" placeholder="Type your Comment..." required className="card-text form-control h-60 border-2" ></textarea>
                             <button disabled={submitting} type='submit' className="btn btn-outline-primary mt-2">Submit</button>
                         </div>
                     </form>

@@ -5,6 +5,19 @@ const user = require('../models/user')
 
 const client = new OAuth2Client("1074737771366-mat44f2fndsqpdb8erut14rkmg9e6ui4.apps.googleusercontent.com")
 
+exports.getAllUser = (req, res) => {
+
+    User.find({}, (err, data) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            res.send(data);
+            res.end();
+        }
+    })
+}
+
 exports.getUser = (req, res) => {
     User.findById(req.params.id, (err, data) => {
         if (err)
@@ -19,6 +32,11 @@ exports.getUser = (req, res) => {
                 data.linkedin = "";
                 data.phoneno = "";
                 data.email = "";
+                data.instagram = "";
+                data.twitter = "";
+                data.youtube = "";
+                data.other = "";
+
                 res.send(data);
                 res.end()
             }
@@ -38,6 +56,15 @@ exports.editUser = (req, res, next) => {
     })
 }
 
+exports.deleteUser = (req, res, next) => {
+    User.deleteOne(req.params.id, (err, data) => {
+        if (err)
+            console.log(err);
+        else
+            res.status(200).json("success")
+
+    })
+}
 
 exports.googleSignin = (req, res, next) => {
     let { tokenId } = req.body

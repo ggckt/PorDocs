@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { Helmet } from "react-helmet"
 function Blogs(props) {
     const [blogs, setblogs] = useState([])
     const [question, setquestion] = useState([])
@@ -50,6 +51,10 @@ function Blogs(props) {
 
     return (
         <div className="container-fluid">
+            <Helmet>
+                <title>PorDocs Questions</title>
+                <meta name="description" content="It contains questions related to finance " />
+            </Helmet>
             <div className="row mt-4">
                 <div className="col-md-9 ps-md-4">
                     {
@@ -93,7 +98,7 @@ function Blogs(props) {
                     </nav>
                 </div>
                 <div className="col-md-3 mt-4 mt-md-5">
-                    <h4 className="mt-md-5 text-center">Recent Blogs</h4>
+                    <h4 className="mt-md-5 text-center">Top Blogs</h4>
                     <div className="list-group">
                         {
                             !blogLoaded ? <div className="d-flex justify-content-center mt-5">
