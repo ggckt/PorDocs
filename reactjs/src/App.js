@@ -32,6 +32,8 @@ function App() {
       <Header isLogedin={isLogedin} logout={logout} login={login} />
       <Helmet>
         <title>PorDocs</title>
+        <meta name="description" content="PorDocs is a Financial website containing blogs and questions related to finance " />
+        <meta name="keywords" content="pordocs,finance,blogs,questions,answers,PorDocs" />
       </Helmet>
       <Switch>
         <Route path='/' exact render={(props) => <Home isLogedin={isLogedin} {...props} />} ></Route>

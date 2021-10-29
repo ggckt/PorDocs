@@ -93,7 +93,7 @@ export default function EditProfile(props) {
                 </div>
                 <div>
                     <input className="me-2" type="checkbox" name="showDetails" value="true"></input>
-                    <label htmlFor="showDetails">Make Your contact Details vaisible to other users</label>
+                    <label htmlFor="showDetails">Make Your contact Details visible to other users</label>
                 </div>
                 {
                     props.isLogedin && user._id === profile._id && !submitting ?
