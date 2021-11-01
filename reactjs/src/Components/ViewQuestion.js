@@ -136,7 +136,8 @@ function ViewQuestion(props) {
         <div className="container-fluid">
             <Helmet>
                 <title>{question.title}</title>
-                <meta name="description" content={question.description} />
+                <meta name="description" content={question.description ? question.description.slice(0, 160) : "pordocs"} />
+                <meta name='author' content={question.username}></meta>
             </Helmet>
             <div className="row">
                 <div className="col-md-9 ps-md-4">

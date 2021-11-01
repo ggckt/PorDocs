@@ -170,10 +170,12 @@ function ViewBlog(props) {
         }
     }
     return (
+
         <div className="container-fluid">
             <Helmet>
                 <title>{blog.title}</title>
-                <meta name="description" content={blog.content} />
+                <meta name="description" content={blog.content ? blog.content.slice(0, 160) : "pordocs"} />
+                <meta name='author' content={blog.username}></meta>
             </Helmet>
             <div className="row">
                 <div className="col-md-9 ps-md-4">
