@@ -1,5 +1,6 @@
 let User = require('../models/user')
 let jwt = require('jsonwebtoken')
+const sharp = require("sharp")
 let { OAuth2Client } = require('google-auth-library')
 const user = require('../models/user')
 
@@ -45,8 +46,15 @@ exports.getUser = (req, res) => {
     })
 }
 
-exports.editUser = (req, res, next) => {
-    req.body.pic = req.file ? req.user._id + req.file.originalname : null
+exports.editUser = async (req, res, next) => {
+    if (req.file) {
+        const buffer = await sharp(req.file.buffer)
+            .resize({ width: 100, height: 100 })
+            .toFormat('png')
+            .png({ quality: 25 })
+            .toBuffer();
+        req.body.pic = req.file ? buffer : null
+    }
     User.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
         if (err) {
             console.log(err)
