@@ -1,13 +1,23 @@
 let express = require('express');
 let router = express.Router();
 let jwt = require('jsonwebtoken')
-
+let multer = require('multer')
 let userController = require('../controller/user')
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "./reactjs/public/uploads/")
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    }
+})
+
+const upload = multer({ storage: storage })
 
 router.get('/alluser', verifytoken, isAdmin, userController.getAllUser)
 router.get('/:id', addUserDetail, userController.getUser)
-router.put('/edit/:id', verifytoken, checkUser, userController.editUser)
+router.put('/edit/:id', verifytoken, checkUser, upload.single("pic"), userController.editUser)
 router.post('', userController.googleSignin)
 router.delete('/:id', verifytoken, isAdmin, userController.deleteUser)
 function addUserDetail(req, res, next) {

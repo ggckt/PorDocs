@@ -28,20 +28,22 @@ export default function EditProfile(props) {
     const submitProfile = (e) => {
         e.preventDefault()
         setsubmitting(true)
-        const profile = {
-            phoneno: e.target.phoneno.value,
-            linkedin: e.target.linkedin.value,
-            facebook: e.target.facebook.value,
-            instagram: e.target.instagram.value,
-            twitter: e.target.twitter.value,
-            youtube: e.target.youtube.value,
-            other: e.target.other.value,
-            showDetails: e.target.showDetails.checked
-        }
+        const profile = new FormData();
+        profile.append("pic", e.target.pic.files[0])
+        profile.append("phoneno", e.target.phoneno.value)
+        profile.append("linkedin", e.target.linkedin.value)
+        profile.append("facebook", e.target.facebook.value)
+        profile.append("instagram", e.target.instagram.value)
+        profile.append("twitter", e.target.twitter.value)
+        profile.append("youtube", e.target.youtube.value)
+        profile.append("other", e.target.other.value)
+        profile.append("showDetails", e.target.showDetails.checked)
+
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
             axios.put(`https://pordocs.herokuapp.com/api/user/edit/${props.match.params.id}`, profile, { headers: { "x-access-token": token } })
                 .then((res) => {
+                    e.target.pic.files[0] = ""
                     e.target.phoneno.value = ""
                     e.target.linkedin.value = ""
                     e.target.facebook.value = ""
@@ -49,18 +51,23 @@ export default function EditProfile(props) {
                     e.target.twitter.value = ""
                     e.target.youtube.value = ""
                     e.target.other.value = ""
-                    props.history.push(`/profile/${props.match.params.id}`)
                     setsubmitting(false)
                 })
                 .catch((err) => console.log(err))
         }
         else {
         }
+
+        props.history.push(`/profile/${props.match.params.id}`)
     }
 
     return (
         <div className="container-fluid">
-            <form className="m-3 m-sm-5 text-center" onSubmit={submitProfile}>
+            <form className="m-3 m-sm-5 text-center" encType="multipart/form-data" onSubmit={submitProfile}>
+                <div className="form mb-3">
+                    <label>Photo.(optional)</label>
+                    <input defaultValue={profile.pic} type="file" accept="image/png,image/jpg,image/jpeg" name="pic" className="form-control" id="floatingInput" ></input>
+                </div>
                 <div className="form-floating mb-3">
                     <input defaultValue={profile.phoneno} type="number" name="phoneno" minLength="10" maxLength="10" className="form-control" id="floatingInput" placeholder="Phone no"></input>
                     <label>Phone no. (optional)</label>
