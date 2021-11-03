@@ -49,9 +49,9 @@ exports.getUser = (req, res) => {
 exports.editUser = async (req, res, next) => {
     if (req.file) {
         const buffer = await sharp(req.file.buffer)
-            .resize({ width: 100, height: 100 })
+            .resize(100)
             .toFormat('png')
-            .png({ quality: 25 })
+            .png({ quality: 1 })
             .toBuffer();
         req.body.pic = req.file ? buffer : null
     }

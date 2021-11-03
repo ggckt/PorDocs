@@ -21,7 +21,7 @@ export default function Profile(props) {
     }, [props.isLogedin])
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('token'))
-        axios.get(`https://www.pordocs.herokuapp.com/api/user/${props.match.params.id}`, { headers: { "x-access-token": token } })
+        axios.get(`https://pordocs.herokuapp.com/api/user/${props.match.params.id}`, { headers: { "x-access-token": token } })
             .then((res) => {
                 if (res.data.pic) {
                     let img = Buffer.from(res.data.pic, 'binary').toString('base64')
