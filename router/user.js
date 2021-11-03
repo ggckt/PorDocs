@@ -3,17 +3,10 @@ let router = express.Router();
 let jwt = require('jsonwebtoken')
 let multer = require('multer')
 let userController = require('../controller/user')
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "./reactjs/public/uploads/")
-    },
-    filename: (req, file, cb) => {
-        cb(null, req.user._id + file.originalname);
-    }
-})
+const storage = multer.memoryStorage()
 
 const upload = multer({ storage: storage })
+
 
 router.get('/alluser', verifytoken, isAdmin, userController.getAllUser)
 router.get('/:id', addUserDetail, userController.getUser)

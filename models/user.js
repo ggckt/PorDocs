@@ -71,7 +71,7 @@ userSchema = new mongoose.Schema({
         default: false
     },
     pic: {
-        type: String,
+        type: Buffer,
         required: false
     }
 

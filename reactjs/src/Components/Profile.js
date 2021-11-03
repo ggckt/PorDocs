@@ -7,6 +7,7 @@ export default function Profile(props) {
     const [user, setuser] = useState({})
     const [profile, setprofile] = useState({})
     const [blogs, setblogs] = useState([])
+    const [pic, setpic] = useState("")
     const [blogLoaded, setblogLoaded] = useState(false)
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -22,6 +23,10 @@ export default function Profile(props) {
         const token = JSON.parse(localStorage.getItem('token'))
         axios.get(`https://pordocs.herokuapp.com/api/user/${props.match.params.id}`, { headers: { "x-access-token": token } })
             .then((res) => {
+                if (res.data.pic) {
+                    let img = Buffer.from(res.data.pic, 'binary').toString('base64')
+                    setpic(img)
+                }
                 setprofile(res.data)
             })
             .catch((err) => console.log(err))
@@ -39,8 +44,8 @@ export default function Profile(props) {
                 <title>{profile.username}</title>
                 <meta name="description" content={profile.username} />
             </Helmet>
-            {profile.pic ?
-                <img alt={profile.username} src={`/uploads/${profile.pic}`} className="img-fluid profile-pic mx-auto d-block"></img>
+            {pic !== "dW5kZWZpbmVk" && pic.length > 0 ?
+                <img alt={profile.username} src={`data:image/png;base64,${pic}`} className="img-fluid profile-pic mx-auto d-block"></img>
                 : null}
             <h3 className="text-center text-primary">{profile.username}</h3>
             {

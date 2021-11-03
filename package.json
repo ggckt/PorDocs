@@ -35,7 +35,8 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "sharp": "^0.29.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
