@@ -41,7 +41,7 @@ export default function EditProfile(props) {
 
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
-            axios.put(`https://www.pordocs.herokuapp.com/api/user/edit/${props.match.params.id}`, profile, { headers: { "x-access-token": token } })
+            axios.put(`https://pordocs.herokuapp.com/api/user/edit/${props.match.params.id}`, profile, { headers: { "x-access-token": token } })
                 .then((res) => {
                     e.target.pic.files[0] = ""
                     e.target.phoneno.value = ""
