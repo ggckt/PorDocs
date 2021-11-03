@@ -4,6 +4,7 @@ export default function EditProfile(props) {
     const [user, setuser] = useState({})
     const [submitting, setsubmitting] = useState(false)
     const [profile, setprofile] = useState({})
+    const [msg, setmsg] = useState("")
     useEffect(() => {
         window.scrollTo(0, 0)
         if (props.isLogedin) {
@@ -27,6 +28,11 @@ export default function EditProfile(props) {
 
     const submitProfile = (e) => {
         e.preventDefault()
+        setmsg("")
+        if (e.target.pic.files[0].size > 160000) {
+            setmsg("Image size should be less than 150kb")
+            return;
+        }
         setsubmitting(true)
         const profile = new FormData();
         profile.append("pic", e.target.pic.files[0])
@@ -43,7 +49,7 @@ export default function EditProfile(props) {
         if (token) {
             axios.put(`https://pordocs.herokuapp.com/api/user/edit/${props.match.params.id}`, profile, { headers: { "x-access-token": token } })
                 .then((res) => {
-                    e.target.pic.files[0] = ""
+                    e.target.pic.files = []
                     e.target.phoneno.value = ""
                     e.target.linkedin.value = ""
                     e.target.facebook.value = ""
@@ -57,7 +63,6 @@ export default function EditProfile(props) {
         }
         else {
         }
-
         props.history.push(`/profile/${props.match.params.id}`)
     }
 
@@ -65,7 +70,7 @@ export default function EditProfile(props) {
         <div className="container-fluid">
             <form className="m-3 m-sm-5 text-center" encType="multipart/form-data" onSubmit={submitProfile}>
                 <div className="form mb-3">
-                    <label>Photo.(optional)</label>
+                    <label>Photo.(optional) {msg}</label>
                     <input defaultValue={profile.pic} type="file" accept="image/png,image/jpg,image/jpeg" name="pic" className="form-control" id="floatingInput" ></input>
                 </div>
                 <div className="form-floating mb-3">
