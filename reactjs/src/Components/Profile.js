@@ -39,20 +39,25 @@ export default function Profile(props) {
                 <title>{profile.username}</title>
                 <meta name="description" content={profile.username} />
             </Helmet>
+            {profile.pic ?
+                <img alt={profile.username} src={`/uploads/${profile.pic}`} className="img-fluid profile-pic mx-auto d-block"></img>
+                : null}
             <h3 className="text-center text-primary">{profile.username}</h3>
-            {(user && user._id === profile._id) || profile.showDetails === true ?
-                <div>
-                    <h5 className="text-center">{profile.phoneno}</h5>
-                    <h5 className="text-center">{profile.email}</h5>
-                    <div className="icons text-center pt-2">
-                        <Link to={{ pathname: profile.linkedin || "#" }} target="_blank" className="ps-2 pe-2" ><i className="fa fa-linkedin fa-2x" ></i></Link>
-                        <Link to={{ pathname: profile.facebook || "#" }} target="_blank" className="ps-2 pe-2"><i className="fa fa-facebook fa-2x"></i></Link>
-                        <Link to={{ pathname: profile.instagram || "#" }} target="_blank" className="ps-2 pe-2"><i className="fa fa-instagram fa-2x"></i></Link>
-                        <Link to={{ pathname: profile.twitter || "#" }} target="_blank" className="ps-2 pe-2"><i className="fa fa-twitter fa-2x"></i></Link>
-                        <Link to={{ pathname: profile.youtube || "#" }} target="_blank" className="ps-2 pe-2"><i className="fa fa-youtube-play fa-2x"></i></Link>
-                        <Link to={{ pathname: profile.other || "#" }} target="_blank" className="ps-2 pe-2"><i className="fa fa-external-link fa-2x"></i></Link>
-                    </div>
-                </div> : null}
+            {
+                (user && user._id === profile._id) || profile.showDetails === true ?
+                    <div>
+                        <h5 className="text-center">{profile.phoneno}</h5>
+                        <h5 className="text-center">{profile.email}</h5>
+                        <div className="icons text-center pt-2">
+                            <Link to={{ pathname: profile.linkedin || "#" }} target="_blank" className="ps-2 pe-2" ><i className="fa fa-linkedin fa-2x" ></i></Link>
+                            <Link to={{ pathname: profile.facebook || "#" }} target="_blank" className="ps-2 pe-2"><i className="fa fa-facebook fa-2x"></i></Link>
+                            <Link to={{ pathname: profile.instagram || "#" }} target="_blank" className="ps-2 pe-2"><i className="fa fa-instagram fa-2x"></i></Link>
+                            <Link to={{ pathname: profile.twitter || "#" }} target="_blank" className="ps-2 pe-2"><i className="fa fa-twitter fa-2x"></i></Link>
+                            <Link to={{ pathname: profile.youtube || "#" }} target="_blank" className="ps-2 pe-2"><i className="fa fa-youtube-play fa-2x"></i></Link>
+                            <Link to={{ pathname: profile.other || "#" }} target="_blank" className="ps-2 pe-2"><i className="fa fa-external-link fa-2x"></i></Link>
+                        </div>
+                    </div> : null
+            }
 
 
             <div className="ms-md-5 me-md-5">

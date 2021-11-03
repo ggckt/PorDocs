@@ -46,6 +46,7 @@ exports.getUser = (req, res) => {
 }
 
 exports.editUser = (req, res, next) => {
+    req.body.pic = req.file ? req.file.originalname : null
     User.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
         if (err) {
             console.log(err)

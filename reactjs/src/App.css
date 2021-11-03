@@ -23,3 +23,9 @@
   .carousel-fade .active.carousel-item-end {
     transition: opacity 0s 1.5s;
   }
+  .profile-pic{
+      height: 20vh;
+      width:20vh;
+      border-radius: 50%;
+      
+  }

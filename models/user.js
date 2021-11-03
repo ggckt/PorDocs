@@ -69,6 +69,10 @@ userSchema = new mongoose.Schema({
     isVerified: {
         type: Boolean,
         default: false
+    },
+    pic: {
+        type: String,
+        required: false
     }
 
 })
