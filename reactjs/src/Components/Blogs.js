@@ -52,6 +52,8 @@ function Blogs(props) {
             <Helmet>
                 <title>PorDocs Blogs</title>
                 <meta name="description" content="It contains blogs related to finance " />
+                <link rel="canonical" href={`https://www.pordocs.com/blog/page/${pageno}`} />
+
             </Helmet>
             <div className="row mt-4">
                 <div className="col-md-9 ps-md-4">

@@ -34,6 +34,7 @@ function App() {
         <title>PorDocs</title>
         <meta name="description" content="PorDocs is a Financial website containing blogs and questions related to finance " />
         <meta name="keywords" content="pordocs,finance,blogs,questions,answers,PorDocs" />
+        <link rel="canonical" href="https://www.pordocs.com/" />
       </Helmet>
       <Switch>
         <Route path='/' exact render={(props) => <Home isLogedin={isLogedin} {...props} />} ></Route>
