@@ -43,6 +43,7 @@ export default function Profile(props) {
             <Helmet>
                 <title>{profile.username}</title>
                 <meta name="description" content={profile.username} />
+                <link rel="canonical" href={`https://www.pordocs.com/profile/${profile._id}`} />
             </Helmet>
             {pic !== "dW5kZWZpbmVk" && pic.length > 0 ?
                 <img alt={profile.username} src={`data:image/png;base64,${pic}`} className="img-fluid profile-pic mx-auto d-block"></img>

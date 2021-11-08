@@ -138,6 +138,7 @@ function ViewQuestion(props) {
                 <title>{question.title}</title>
                 <meta name="description" content={question.description ? question.description.slice(0, 160) : "pordocs"} />
                 <meta name='author' content={question.username}></meta>
+                <link rel="canonical" href={`https://www.pordocs.com/question/${question._id}`} />
             </Helmet>
             <div className="row">
                 <div className="col-md-9 ps-md-4">

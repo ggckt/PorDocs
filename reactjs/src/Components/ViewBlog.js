@@ -176,6 +176,7 @@ function ViewBlog(props) {
                 <title>{blog.title}</title>
                 <meta name="description" content={blog.content ? blog.content.slice(0, 160) : "pordocs"} />
                 <meta name='author' content={blog.username}></meta>
+                <link rel="canonical" href={`https://www.pordocs.com/blog/${blog._id}`} />
             </Helmet>
             <div className="row">
                 <div className="col-md-9 ps-md-4">
